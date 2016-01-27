@@ -31,7 +31,7 @@ Use `.gitignore` files to ignore files or filenames matching specific patterns.
 **git add**
 
 |Command|Description|
-|-|-|
+|----|----|
 |`git add .`| looks at the working tree and adds all those paths to the staged changes if they are either changed or are new and not ignored, it does not stage any 'rm' actions.|
 |`git add -u`| looks at all the already tracked files and stages the changes to those files if they are different or if they have been removed. It does not add any new files, it only stages changes to already tracked files.|
 |`git add -A`|equivalent to  `git add .`; `git add -u`.|
@@ -39,14 +39,14 @@ Use `.gitignore` files to ignore files or filenames matching specific patterns.
 #### Checking Status
 
 |Command|Description|
-|-|-|
+|----|----|
 |`git status`|To check the status of the files|
 |`git status -s` or `git status --short`|A short description of files' status|
 
 #### git diff
 
 |Command|Description|
-|-|-|
+|----|----|
 |`git diff`|lists the exact lines added or removed. It compares what's in the working directory vs staging area. Hence shows only the unstaged changes|
 |`git diff --staged`|shows what you've staged that will go into your next commit. It compares the staging area vs the last commit.|
 |`git diff --cached`||
@@ -55,13 +55,16 @@ Use `.gitignore` files to ignore files or filenames matching specific patterns.
 
 #### git log
 
+
 |Command|Description|
-|-|-|
+|----|----|
 |`git log`|lists the commits made in that repo in reverse chronological order.|
 
-Useful Git log options:
+
+Useful Git log options:  
+  
 |Command|Description|Example|
-|-|-|-|
+|----|----|----|
 |`-p`|shows the difference introduced in each commit. It has the same info as git log but a diff directly following each entry.| `git log -p`|
 |`--stat`|gives abbreviated stats for each commit|`git log --stat`|
 |`--pretty=`|changes the log output to formats other than the default||
