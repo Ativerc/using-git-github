@@ -67,10 +67,10 @@ Useful Git log options:
 |`--pretty=`|changes the log output to formats other than the default||
 
 
-Options for `--pretty=`
+* Options for `--pretty=`
 
 |Command|Description|Example|
-|-|-|-|
+|----|----|----|
 |oneline|prints each commit on a single line, which is useful if you’re looking at a lot of commits.|<code>$ git log --pretty=oneline<br>ca82a6dff817ec66f44342007202690a93763949 changed the verison number|
 |`short`, `full`, `fuller`|options show the output in roughly the same format but with less or more information, respectively.|`$ git log --pretty=full`|
 |format|allows you to specify your own log output format. Very useful for machine parsing. MOST USEFUL|<code>$ git log --pretty=format:"%h -%an, %ar : %s"<br> ca82a6d - Scott Chacon, 6 years ago : changed the version number```|
@@ -99,7 +99,7 @@ Options for `--pretty=`
 * **Common options of `git log`**:
 
 	|Option|Description|
-	|-|-|
+	|-----|------|
 	|-p |Show the patch introduced with each commit.|
 	|--stat |Show statistics for files modified in each commit.
 	|--shortstat |Display only the changed/insertions/deletions line from the --stat command.
@@ -113,7 +113,7 @@ Options for `--pretty=`
 * **Options to limit the output of `git log`**
 
 	|Option|Description|
-	|-|-|
+	|-------|-------|
 	|-(n)| Show only the last n commits|
 	|--since , --after| Limit the commits to those made after the specified date.|
 	|--until , --before| Limit the commits to those made before the specified date.|
