@@ -43,6 +43,9 @@ Use `.gitignore` files to ignore files or filenames matching specific patterns.
 |`git status`|To check the status of the files|
 |`git status -s` or `git status --short`|A short description of files' status|
 
+
+## Checking LOGS:
+
 #### git diff
 
 |Command|Description|
@@ -130,3 +133,113 @@ Useful Git log options:
   * Another really helpful filter is the -S option which takes a string and only shows the commits that introduced a change to the code that added or removed that string. For instance, if you wanted to find the last commit that added or removed a reference to a specific function, you could call: `$ git log --Sfunction_name`
   * The last really useful option to pass to git log as a filter is a path. If you specify a directory or file name, you can limit the log output to commits that introduced a change to those files. This is always the last option and is generally preceded by double dashes ( -- ) to separate the paths from the options.
 
+
+
+## REMOVING and MOVING FILES
+
+### Removing Files (`git rm file` or `git rm --cached file`)
+
+* To remove a file from Git, you have to remove it from your tracked files -- a.k.a. from the staging area.
+
+* `git rm` command removes a file from Git and also removes the file from your working directory so you don’t see it as an untracked file the next time around. `git rm` **removes the file from the disk as well as the working tree.**
+
+* If you simply delete the file from your working directory using say `rm`, it shows up under the “Changed but not updated” (that is, unstaged) area of your `git status` output.
+
+* However, **if you want to keep the file in your working tree but remove it from your staging area.** In other words, you may want to keep the file on your hard drive but not have Git track it anymore. Use the `--cached` option of `git rm`.  
+Example:
+`git rm --cached README`
+
+* You can pass files, directories, and file-glob patterns to the `git rm` command.  
+Example: `git rm log/\*.log` This
+command removes all files that have the .log extension in the log/ directory.
+
+### Moving Files
+
+* If you want to rename a file in Git, you can run something like  
+`git mv file_from file_to`
+
+* Example:   
+	```
+	$ git mv README.md README
+	$ git status
+	On branch master
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+
+
+    	 renamed:    README.md -> README
+	```
+  * This is equivalent to running something like this:
+	```
+	$ mv README.md README
+	$ git rm README.md
+	$ git add README
+	```
+
+
+## UNDOING THINGS:
+
+
+**Be careful, because you can’t always undo some of these undos.**
+
+
+* `git commit --amend` when you commit too early and possibly forget to add some files, or you mess up your commit message. If you want to try that commit again, you can run commit with the `--amend` option.
+
+
+* This command takes your staging area and uses it for the commit.  
+	* **If you’ve made no changes since your last commit** (for instance, you  run this command immediately after your previous commit), then your snapshot will look exactly the same, and **all you’ll change is your commit message.**
+	* The same commit-message editor fires up, but it already contains the message of your previous commit. You can edit the message the same as always, but it overwrites your previous commit.
+	* Example: if you commit and then realize you forgot to stage the changes in a file you wanted to add to this commit, you can do something like this:   
+    
+	  ```
+	  $git commit -m 'initial commit'
+	  $ git add forgotten_file
+	  $ git commit --amend
+	  ```
+		You end up with a single commit – the second commit replaces the results of the first.
+
+### Unstaging a staged file
+
+
+* Use `git reset HEAD <file>` to unstage a staged file.
+
+* git reset can be a dangerous command if you call it with `--hard`. Calling git reset without an option is not dangerous - it only touches your staging area.
+
+	Example:
+
+	```
+	$ git reset HEAD benchmarks.rb
+	Unstaged changes after reset:
+	M       benchmarks.rb
+	$ git status
+	On branch master
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+	
+	
+		renamed:    README.md -> README
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working 	directory)
+
+
+		modified:	benchmarks.rb
+	```
+
+### Unmodifying a Modified File
+
+
+* So you have made some changes to a git tracked file, but want to revert it back to what it looked like when you last committed or cloned. `git status` tells us how to do that `(use "git checkout -- <file>..." to discard changes in working directory)`
+
+* So we use that `git checkout -- <file>`
+
+* `git checkout -- [file]` **is a DANGEROUS COMMAND**. *Any changes you made to that file are gone – you just copied another file over it*. **Don’t ever use this command unless you absolutely know that you don’t want the file.**
+
+* If you would like to keep the changes you’ve made to that file but still need to get it out of the way for now, look at **branching** and **stashing**.These are generally better ways to go.
+
+* Anything that is *committed* in Git can almost always be recovered. However, anything you lose that was never committed is likely never to be seen again.
+
+* However, anything you lose that was never committed is likely never to be seen again.
+
+
+  
